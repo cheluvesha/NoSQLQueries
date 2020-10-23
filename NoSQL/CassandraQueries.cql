@@ -31,3 +31,12 @@ SELECT * FROM college.students;
 SELECT USN,Course FROM college.students;
 
 
+SELECT USN,Course FROM college.students WHERE USN = 004;
+
+
+DELETE-
+
+DELETE phone FROM college.students WHERE USN = 004;
+
+
+
