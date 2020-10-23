@@ -40,3 +40,16 @@ DELETE phone FROM college.students WHERE USN = 004;
 
 
 
+Maps:
+
+
+
+create Table info.users( UserID varint primary key, UserName text, Address map<text,text>);
+Insert into info.users (userid , username , address ) values (1,'cheluvesha',{'bangalore' : 'karnataka'});
+select * from info.users ;
+
+
+UPDATE info.users SET username = 'Bharath', address = {'mumbai' : 'maharastra'} WHERE userid = 2;
+
+
+DELETE address['city'] FROM info.users WHERE userid = 2;
