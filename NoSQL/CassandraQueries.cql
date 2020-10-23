@@ -69,4 +69,19 @@ INSERT INTO images (name, owner, tags)
 // Replace the existing set entirely
 UPDATE images SET tags = { 'kitten', 'cat', 'lol' } WHERE name = 'cat.jpg';
 
+// Adding multiple values to existing set
+UPDATE info.images SET tags = tags + { 'gray', 'cuddly' } WHERE name = 'cat.jpg';
 
+// Deleting from set
+UPDATE info.images SET tags = tags - { 'cat' } WHERE name = 'cat.jpg';
+
+
+List :
+
+CREATE TABLE info.plays (id text PRIMARY KEY,     game text,     players int,     scores list<int>  );
+
+
+INSERT INTO plays (id, game, players, scores)
+             VALUES ('123-afde', 'quake', 3, [17, 4, 2]);
+
+UPDATE info.plays SET scores = [ 3, 9, 4] WHERE id = '123-abc';
