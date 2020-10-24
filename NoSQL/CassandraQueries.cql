@@ -85,3 +85,15 @@ INSERT INTO plays (id, game, players, scores)
              VALUES ('123-afde', 'quake', 3, [17, 4, 2]);
 
 UPDATE info.plays SET scores = [ 3, 9, 4] WHERE id = '123-abc';
+
+
+// Append the List Data with Existing data
+UPDATE info.plays SET players = 5, scores = scores + [ 14, 21 ] WHERE id = '123-abc';
+
+// Deleting the all occurences 
+
+UPDATE plays SET scores = scores - [ 12, 21 ] WHERE id = '123-afde';
+
+//Removing an element by its position in the list
+
+DELETE scores[1] FROM info.plays WHERE id = '123-abc';
