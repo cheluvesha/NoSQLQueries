@@ -97,3 +97,78 @@ UPDATE plays SET scores = scores - [ 12, 21 ] WHERE id = '123-afde';
 //Removing an element by its position in the list
 
 DELETE scores[1] FROM info.plays WHERE id = '123-abc';
+
+
+INDEX-
+
+CREATE INDEX NAMEINDEX ON college.students (firstname) ;
+
+
+select * from college.students where firstname = 'sam';
+
+// Drop index
+
+DROP INDEX college.nameindex ;
+
+// Time To Live
+
+INSERT INTO college.students (usn,firstname,lastname) values (2,'ted','bear') using ttl 100;
+
+
+User Defined Type (UDT)-
+
+CREATE KEYSPACE emp WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+
+CREATE TYPE Emp.Current_add
+   ... (
+   ... Emp_id int,
+   ... h_no text,
+   ... city text,
+   ... state text,
+   ... pin_code int,
+   ... country text 
+   ... ); 
+
+CREATE TABLE Emp.Registration (  Emp_id int PRIMARY KEY,  Emp_Name text,  current_address FROZEN<Current_add> );
+
+INSERT INTO emp.registration (Emp_id, Emp_Name, current_address ) 
+ values (1000, 'Ashish', { h_no :'A 210', city : 'delhi', state : 'DL', pin_code : 12345, country :'IN'});
+
+
+User Defined Function-
+
+
+CREATE FUNCTION Emp.Max_value(value1 int, value2 int) CALLED ON NULL INPUT RETURNS int LANGUAGE java AS $$return Math.max(value1, value2);$$;
+
+
+INSERT INTO UDF_Function_test(function_id, num1, num2) 
+   ... VALUES(101, 400, 600);
+
+SELECT function_id, num1, num2, Max_value(num1, num2)  FROM emp.UDF_Function_test  ;
+
+
+
+Aggregation Function- 
+
+SELECT count(*) FROM aggregation.emp;
+
+SELECT min(score) FROM aggregation.emp;
+
+SELECT max(score) FROM aggregation.emp; 
+
+SELECT sum(score) FROM aggregation.emp;
+
+SELECT avg(score) FROM aggregation.emp;
+
+
+Composite keys-
+
+CREATE TABLE books (
+   isbn text,
+   title text,
+   author text,
+  publisher text,
+   category text,
+   PRIMARY KEY ((isbn, author), publisher)
+);
+
