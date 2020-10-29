@@ -1,0 +1,16 @@
+//https://www.w3schools.in/mongodb
+
+Creating a DB :
+
+use DemoDb;
+
+Show dbs; // view list of Databases
+
+Insert :
+
+db.movie.insert({"name":"Avengers: Endgame"})
+
+Deleting a Database : 
+
+db.dropDatabase()
+
