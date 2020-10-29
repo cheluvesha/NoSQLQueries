@@ -14,3 +14,50 @@ Deleting a Database :
 
 db.dropDatabase()
 
+
+Create Collection :
+
+db.createCollection("Students",{size:5242880,max:100,capped:true})
+
+Insert into Collection :
+
+db.StudentDetails.insert({usn:001,name:"Arun",branch:"ECE"});
+db.StudentDetails.insert({usn:002,name:"Aman",branch:"ECE"});
+db.StudentDetails.insert({usn:002,name:"Aman",branch:"ECE"});
+db.StudentDetails.insert({usn:003,name:"Bharath",branch:"CSE"});
+db.StudentDetails.insert({usn:004,name:"Shiva",branch:"CE"});
+db.StudentDetails.insert({usn:005,name:"Sagar",branch:"CE"});
+
+
+Reading the data :
+
+db.StudentDetails.find();
+
+Filtering the data :
+
+filtering where branch name is ECE
+
+db.StudentDetails.find({branch:"ECE"})
+
+Insert with Multiple Values :
+
+db.StudentDetails.insert( [ { usn:007,name:"kiran",branch:"ISE" }, { usn:008,name:"Max",branch:"ISE" } ] )
+
+Embedded Document insert : MongoDB also allow users to create document containing other documents, arrays of values, as well as arrays of documents.
+
+db.BranchDetails.insert( { College: "DSCE", Branch:[ {ECE:"Electronics"},{CSE:"Computer Science"},{CE:"Civil Engineering"},{ISE:"Information Science"},{ME:"Mechanical"}]})
+
+pretty method is used for giving a proper format :
+ 
+db.BranchDetails.find().pretty();
+
+
+Filtering with Or condition :
+
+db.StudentDetails.find({$or: [{usn:008,branch:"ISE"}]})
+
+Filtering with And condition :
+
+db.StudentDetails.find({usn:008,branch:"ISE"})
+
+
