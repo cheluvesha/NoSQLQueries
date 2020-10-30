@@ -1,13 +1,13 @@
-CREATE KEYSPACE- 
+// CREATE KEYSPACE- 
 
 CREATE KEYSPACE College WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
-Description of keyspace-
+// Description of keyspace-
 
 DESCRIBE College
 
 
-Create Table using keyspace-
+// Create Table using keyspace-
 
 CREATE TABLE College.Students(
    ... USN varint Primary key,
@@ -24,7 +24,7 @@ Update data-
 
 UPDATE college.students SET course = '.net' WHERE usn = 002;
 
-Read Data-
+// Read Data-
 
 SELECT * FROM college.students;
 
@@ -34,13 +34,13 @@ SELECT USN,Course FROM college.students;
 SELECT USN,Course FROM college.students WHERE USN = 004;
 
 
-DELETE-
+// DELETE-
 
 DELETE phone FROM college.students WHERE USN = 004;
 
 
 
-Maps:
+// Maps:
 
 
 
@@ -55,13 +55,13 @@ UPDATE info.users SET username = 'Bharath', address = {'mumbai' : 'maharastra'} 
 DELETE address['city'] FROM info.users WHERE userid = 2;
 
 
-SETS:
+// SETS:
 
 CREATE TABLE images (
     name text PRIMARY KEY,
     owner text,
     tags set<text> // A set of text values
-);
+); 
 
 INSERT INTO images (name, owner, tags)
             VALUES ('cat.jpg', 'jsmith', { 'pet', 'cute' });
@@ -76,7 +76,7 @@ UPDATE info.images SET tags = tags + { 'gray', 'cuddly' } WHERE name = 'cat.jpg'
 UPDATE info.images SET tags = tags - { 'cat' } WHERE name = 'cat.jpg';
 
 
-List :
+// List :
 
 CREATE TABLE info.plays (id text PRIMARY KEY,     game text,     players int,     scores list<int>  );
 
@@ -99,7 +99,7 @@ UPDATE plays SET scores = scores - [ 12, 21 ] WHERE id = '123-afde';
 DELETE scores[1] FROM info.plays WHERE id = '123-abc';
 
 
-INDEX-
+// INDEX-
 
 CREATE INDEX NAMEINDEX ON college.students (firstname) ;
 
@@ -115,7 +115,7 @@ DROP INDEX college.nameindex ;
 INSERT INTO college.students (usn,firstname,lastname) values (2,'ted','bear') using ttl 100;
 
 
-User Defined Type (UDT)-
+// User Defined Type (UDT)-
 
 CREATE KEYSPACE emp WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
 
@@ -135,7 +135,7 @@ INSERT INTO emp.registration (Emp_id, Emp_Name, current_address )
  values (1000, 'Ashish', { h_no :'A 210', city : 'delhi', state : 'DL', pin_code : 12345, country :'IN'});
 
 
-User Defined Function-
+// User Defined Function-
 
 
 CREATE FUNCTION Emp.Max_value(value1 int, value2 int) CALLED ON NULL INPUT RETURNS int LANGUAGE java AS $$return Math.max(value1, value2);$$;
@@ -148,7 +148,7 @@ SELECT function_id, num1, num2, Max_value(num1, num2)  FROM emp.UDF_Function_tes
 
 
 
-Aggregation Function- 
+// Aggregation Function- 
 
 SELECT count(*) FROM aggregation.emp;
 
@@ -161,7 +161,7 @@ SELECT sum(score) FROM aggregation.emp;
 SELECT avg(score) FROM aggregation.emp;
 
 
-Composite keys-
+// Composite keys-
 
 CREATE TABLE books (
    isbn text,
