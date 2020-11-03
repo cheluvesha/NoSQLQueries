@@ -172,3 +172,24 @@ CREATE TABLE books (
    PRIMARY KEY ((isbn, author), publisher)
 );
 
+// Cassandra - Query a column with collection type
+                                           
+CREATE KEYSPACE Frozen WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;
+                 
+CREATE TABLE data_points (
+          ...   id text PRIMARY KEY,
+          ...   created_at timestamp,
+          ...   previous_event_id varchar,
+          ...   properties map<text,text>
+          ... );
+INSERT INTO data_points (id, properties) VALUES ('1', { 'fruit' : 'apple', 'band' : 'Beatles' });
+INSERT INTO data_points (id, properties) VALUES ('2', { 'fruit' : 'orange', 'band' : 'Beatles' });
+INSERT INTO data_points (id, properties) VALUES ('~', { 'fruit' : 'Pink', 'band' : 'EDM' });
+INSERT INTO data_points (id, properties) VALUES ('3', { 'fruit' : 'Pink', 'band' : 'EDM' });
+INSERT INTO data_points (id, properties) VALUES ('3', { 'fruit' : 'banana', 'band' : 'EDM' });
+INSERT INTO data_points (id, properties) VALUES ('4', { 'fruit' : 'melon', 'band' : 'Weeknd' });
+                                                 
+SELECT * FROM data_points WHERE properties CONTAINS 'Beatles';
+                                                 
+                                                 
+                                             
